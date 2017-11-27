@@ -10,7 +10,9 @@ RUN apt-get update && \
     git \
     openssh-client \
     && rm -rf /var/lib/apt/lists/*
-    
-RUN chown -R nobody:nobody /usr/local/lib/node_modules && chown -R nobody:nobody /usr/local/bin
 
+# https://github.com/nodejs/docker-node/blob/bf84a38aeacb4f6aad34e07c79fd3a0084da5cd2/docs/BestPractices.md#global-npm-dependencies
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV CHROME_BIN /usr/bin/chromium
+
+USER node
